@@ -1,3 +1,4 @@
+import { LLMModel } from '@virtuals-protocol/game';
 
 export interface ColoFunOptions {
   apiKey: string;
@@ -5,13 +6,11 @@ export interface ColoFunOptions {
   gameName: string;
   gameBackground: string;
   gameRules: string;
-  administratorTask: string;
-  stages: {
-    description: string;
-  }[];
-  getGameStats: () => Promise<Stats>;
+  adminTask: string;
+  adminLlmModel?: LLMModel | string;
   players: ColoFunPlayer[];
-  operations: ColoFunOperation<OperationArg[]>[];
+  stages: ColoFunStage[];
+  getGameStats: () => Promise<Stats>;
 }
 
 export interface Stats {
@@ -22,16 +21,24 @@ export interface Stats {
 }
 
 export interface ColoFunPlayer {
-  id: string;
   name: string;
   personality: string;
   strategy: string;
+  task: string;
+  llmModel?: LLMModel | string;
   getStats: () => Promise<Stats>;
 }
 
 export type ExecutableArgs<T extends OperationArg[]> = {
   [K in T[number]['name']]: string;
 };
+
+export interface ColoFunStage {
+  id: string;
+  name: string;
+  description: string;
+  operations: ColoFunOperation<OperationArg[]>[];
+}
 
 export interface ColoFunOperation<T extends OperationArg[]> {
   name: string;

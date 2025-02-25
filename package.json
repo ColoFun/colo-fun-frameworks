@@ -16,6 +16,6 @@
   "author": "web3colofun@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "@virtuals-protocol/game": "^0.1.7"
+    "@virtuals-protocol/game": "^0.1.9"
   }
 }
